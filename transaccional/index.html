@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--====== Title ======-->
+    <title>Zona Transaccional</title>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/png">
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+
+    <!--====== Aos css ======-->
+    <link rel="stylesheet" href="../assets/css/aos.css">
+
+    <!--====== Line Icons css ======-->
+    <link rel="stylesheet" href="../assets/css/LineIcons.css">
+
+    <!--====== Default css ======-->
+    <link rel="stylesheet" href="../assets/css/default.css">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+
+</head>
+
+<body>
+
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->
+    
+    <!--====== HEADER PART START ======-->
+
+    <header class="header-area">
+        <div class="navbar-area navbar-transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="../assets/images/logo.svg" alt="Logo">
+                            </a>
+
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarFive" aria-controls="navbarFive" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarFive">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="page-scroll" href="#home">Inicio</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div>
+        
+
+    <section id="contact" class="contact-area gray-bg pt-50 p-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mt-45">
+                        <h3 class="title">Zona Transaccional</h3>
+                    </div>
+
+              
+                    <div class="contact-form form-style-four mt-15">
+   
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Tipo de transacción</span>
+                            <select class="form-control" id="tipoTransaccion" aria-describedby="basic-addon1" required>
+                              <option value="">Selecciona una opción</option>
+                              <option value="saldo">Consulta Saldo</option>
+                              <option value="deposito">Depósito</option>
+                              <option value="retiro">Retiro</option>
+                              <option value="transferencia">Transferencia</option>
+                            </select>
+                     </div>
+                          
+                          <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Tipo de cuenta</span>
+                            <select class="form-control" id="tipoTransaccion" aria-describedby="basic-addon1" required>
+                              <option value="">Seleccione tipo de cuenta</option>
+                              <option value="ahorro">Cuenta de Ahorro</option>
+                              <option value="corriente">Cuenta de Corriente</option>
+                       
+                            </select>
+                          </div>
+                          
+                          <div class="imput-group mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text" id="basic-addon3">Numero cuenta destino</span>
+                              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                            
+                          </div>
+                          <div class="imput-group mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text" id="basic-addon3">Valor $</span>
+                              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                         <br><br>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-text">.00</span>
+                          </div>
+                          
+                          <div>
+                          <button type="submit" class="btn btn-primary">Enviar
+                        </div>
+                    </div> <!-- contact form -->
+                </div>
+
+                <div id="mi-saldo-actual"></div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                     <div class="section-title mt-45 pb-20">
+                        <h3 class="title">Informacion de Contacto</h3>
+                    </div>
+                    <div class="contact-info">
+                        <ul class="info">
+                            <li>
+                                <div class="single-info">
+                                    <div class="info-icon">
+                                        <i class="lni-map-marker"></i>
+                                    </div>
+                                    <div class="info-content">
+                                        <p class="text">Calle 44 sur #32-34 Poblado</p>
+                                    </div>
+                                </div> <!-- single info -->
+                            </li>
+                            <li>
+                                <div class="single-info">
+                                    <div class="info-icon">
+                                        <i class="lni-phone-handset"></i> 
+                                    </div>
+                                    <div class="info-content">
+                                        <p class="text">+57 604 234 3555</p>
+                                    </div>
+                                </div> <!-- single info -->
+                            </li>
+                            <li>
+                                <div class="single-info">
+                                    <div class="info-icon">
+                                        <i class="lni-phone"></i>
+                                    </div>
+                                    
+                                </div> <!-- single info -->
+                            </li>
+                            <li>
+                                <div class="single-info">
+                                    <div class="info-icon">
+                                        <i class="lni-envelope"></i>
+                                    </div>
+                                    <div class="info-content">
+                                        <p class="text">admin@bancocrecer.com</p>
+                                    </div>
+                                </div> <!-- single info -->
+                            </li>
+                        </ul>
+                        <ul class="social mt-30">
+                            <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                            <li><a href="#"><i class="lni-twitter-original"></i></a></li>
+                            <li><a href="#"><i class="lni-instagram-original"></i></a></li>
+                            <li><a href="#"><i class="lni-linkedin-original"></i></a></li>
+                        </ul>
+                    </div> <!-- contact-info -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== CONTACT ONE PART ENDS ======-->
+    
+    <!--====== FOOTER FIVE PART START ======-->
+
+    <footer id="footer" class="footer-area footer-bark">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="footer-logo text-center">
+                        <a class="mt-30" href="../index.html"><img src="../assets/images/logo.svg" alt="Logo"></a>
+                    </div> <!-- footer logo -->
+                    <ul class="social text-center mt-60">
+                        <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                        <li><a href="#"><i class="lni-twitter-original"></i></a></li>
+                        <li><a href="#"><i class="lni-instagram-original"></i></a></li>
+                    </ul> <!-- social -->
+                    <div class="footer-support text-center">
+                        <span class="number">+57 604 234 3555</span>
+                        <span class="mail">soporte@bancocrecer.com</span>
+                    </div>
+                    <div class="footer-app-store text-center">
+                        <ul>
+                            <li><a href="#"><img src="../assets/images/app-store.png" alt="app"></a></li>
+                            <li><a href="#"><img src="../assets/images/play-store.png" alt="play"></a></li>
+                        </ul>
+                    </div>
+                 
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </footer>
+
+    <!--====== FOOTER FIVE PART ENDS ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->   
+
+
+
+
+
+
+
+    <!--====== jquery js ======-->
+    <script src="../assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+
+
+    <!--====== Scrolling Nav js ======-->
+    <script src="../assets/js/jquery.easing.min.js"></script>
+    <script src="../assets/js/scrolling-nav.js"></script>
+
+    <!--====== Main js ======-->
+    <script src="../assets/js/main.js"></script>
+    <script src="./js/main.js"></script>
+
+</body>
+
+</html>

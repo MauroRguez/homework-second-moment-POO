@@ -1,0 +1,52 @@
+/* Login Area */
+.login-area {
+    background-color: #f9f9f9;
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.login-form {
+    background: #fff;
+    padding: 30px;
+    margin-top: 120px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form .form-title {
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form .form-control {
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+.login-form .main-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form .main-btn:hover {
+    background-color: #0056b3;
+}
