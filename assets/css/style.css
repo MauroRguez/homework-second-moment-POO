@@ -33,7 +33,9 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
-
+.welcome-area pt-50 pb-100{
+  background-color: #2bdbdc;
+}
 img {
   max-width: 100%; }
 

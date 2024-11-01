@@ -35,16 +35,17 @@
 .login-form .main-btn {
     background-color: #007bff;
     color: #fff;
-    padding: 10px 20px;
+    padding: 5px 10px; /* Reduced padding */
     border-radius: 50px;
     text-decoration: none;
     display: block;
-    width: 100%;
+    width: 50%; /* Reduced width */
     text-align: center;
-    font-size: 18px;
+    font-size: 14px; /* Reduced font size */
     font-weight: bold;
     border: none;
     cursor: pointer;
+    margin: 0 auto; /* Center the button */
 }
 
 .login-form .main-btn:hover {
