@@ -11,7 +11,12 @@ document
         const genero = document.getElementById("genero").value;
         const telefono = document.getElementById("telefono").value;
         const password = document.getElementById("password").value;
-  
+        const passwordValid= document.getElementById("passwordValid").value;
+        //comparar contraseñas
+        if (password !== passwordValid) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
         const numberAccount = Math.floor(Math.random() * 1000000000);
         // Validación de contraseña
         // const passwordPattern = /^(?=.[A-Z])(?=.\d).{8,}$/;

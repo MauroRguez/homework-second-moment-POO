@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" href="../ingreso/styles.css">
     <link rel="stylesheet" href="./registro.css">
+    <link rel="stylesheet" href="./transaccional.css">
 
 </head>
 
@@ -96,67 +97,62 @@
             </div> <!-- container -->
         </div>
         
-
-    <section id="contact" class="contact-area gray-bg pt-50 p-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="section-title mt-45">
-                        <h3 class="title">Zona Transaccional</h3>
+        <section id="contact" class="contact-area gray-bg pt-50 p-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="section-title mt-45">
+                            <h3 class="title">Zona Transaccional</h3>
+                        </div>
+                        <div class="contact-form form-style-four mt-15">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Tipo de transacción</span>
+                                <select class="form-control" id="tipoTransaccion" aria-describedby="basic-addon1" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="saldo">Consulta Saldo</option>
+                                    <option value="deposito">Depósito</option>
+                                    <option value="retiro">Retiro</option>
+                                    <option value="transferencia">Transferencia</option>
+                                </select>
+                            </div>
+                            <div id="transaccionOpciones">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Tipo de cuenta</span>
+                                    <select class="form-control" id="tipoCuenta" aria-describedby="basic-addon1" required>
+                                        <option value="">Seleccione tipo de cuenta</option>
+                                        <option value="ahorro">Cuenta de Ahorro</option>
+                                        <option value="corriente">Cuenta de Corriente</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3" id="cuentaDestino">
+                                    <span class="input-group-text" id="basic-addon1">Número de cuenta destino</span>
+                                    <input type="text" class="form-control" id="numeroCuentaDestino" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3" id="valor">
+                                    <span class="input-group-text">Valor $</span>
+                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            
+                                </div>
+                            </div>
+                            <button id="submitBtn" class="main-btn">Enviar</button>
+                        </div>
                     </div>
 
-              
-                    <div class="contact-form form-style-four mt-15">
-   
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Tipo de transacción</span>
-                            <select class="form-control" id="tipoTransaccion" aria-describedby="basic-addon1" required>
-                              <option value="">Selecciona una opción</option>
-                              <option value="saldo">Consulta Saldo</option>
-                              <option value="deposito">Depósito</option>
-                              <option value="retiro">Retiro</option>
-                              <option value="transferencia">Transferencia</option>
-                            </select>
-                     </div>
-                          
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Tipo de cuenta</span>
-                            <select class="form-control" id="tipoTransaccion" aria-describedby="basic-addon1" required>
-                              <option value="">Seleccione tipo de cuenta</option>
-                              <option value="ahorro">Cuenta de Ahorro</option>
-                              <option value="corriente">Cuenta de Corriente</option>
-                       
-                            </select>
-                          </div>
-                          
-                          <div class="imput-group mb-3">
-                            <div class="input-group">
-                              <span class="input-group-text" id="basic-addon3">Numero cuenta destino</span>
-                              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                    
+                    <div class="col-lg-4">
+                        <div class="info-window mt-45">
+                            <h3 class="info-title">Información de la Cuenta</h3>
+                            <div id="accountInfo">
+                                <!-- Aquí se mostrará la información de la cuenta -->
+                                 <p></p>
                             </div>
-                            
-                          </div>
-                          <div class="imput-group mb-3">
-                            <div class="input-group">
-                              <span class="input-group-text" id="basic-addon3">Valor $</span>
-                              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-                            </div>
-                         <br><br>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                            <span class="input-group-text">.00</span>
-                          </div>
-                          
-                          <div>
-                          <button type="submit" class="btn btn-primary">Enviar
                         </div>
-                    </div> <!-- contact form -->
+                    </div>
                 </div>
-
-                <div id="mi-saldo-actual"></div>
-
-
+            </div>
+        </section>
+    
+<section>
                 <div class="col-lg-4 col-md-6 col-sm-8">
                      <div class="section-title mt-45 pb-20">
                         <h3 class="title">Informacion de Contacto</h3>
@@ -255,7 +251,7 @@
     <!--====== BACK TOP TOP PART ENDS ======-->   
 
 
-
+<script src="./transaccional.js"></script>
 
 
 

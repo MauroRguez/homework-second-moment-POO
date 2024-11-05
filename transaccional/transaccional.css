@@ -1,0 +1,19 @@
+/* Info Window */
+.info-window {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.info-window .info-title {
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.info-window #accountInfo {
+    font-size: 16px;
+    color: #333;
+}

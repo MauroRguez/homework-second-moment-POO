@@ -103,17 +103,30 @@
                                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="tipoDocumento">Genero</label>
+                                    <select class="form-control" id="genero" name="genero" required>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="NoBinario">No Binario</option>
+                               
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="tipoDocumento">Tipo de Documento</label>
                                     <select class="form-control" id="tipoDocumento" name="tipoDocumento" required>
-                                        <option value="cc">Cédula de Ciudadanía (C.C)</option>
-                                        <option value="ce">Cédula de Extranjería (C.E)</option>
-                                        <option value="ti">Tarjeta de Identidad (T.I)</option>
-                                        <option value="pasaporte">Pasaporte</option>
+                                        <option value="CC">Cédula de Ciudadanía (C.C)</option>
+                                        <option value="CE">Cédula de Extranjería (C.E)</option>
+                                        <option value="TI">Tarjeta de Identidad (T.I)</option>
+                                        <option value="Pasaporte">Pasaporte</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="numeroDocumento">Número de Documento</label>
                                     <input type="text" class="form-control" id="numeroDocumento" name="numeroDocumento" placeholder="Número de Documento" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono">Telefono</label>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Correo Electrónico</label>
@@ -125,7 +138,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Confirma la Contraseña</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+                                    <input type="password" class="form-control" id="passwordValid" name="password" placeholder="Contraseña" required>
                                 </div>
                                 <button type="submit" class="main-btn">Registrar</button>
                             </form>

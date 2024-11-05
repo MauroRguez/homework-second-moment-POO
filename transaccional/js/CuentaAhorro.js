@@ -2,5 +2,7 @@ class CuentaAhorro extends Cuenta{
     constructor(tasaInteres){
         this.tasaInteres
     }
-    calcularInteres(){}
+    calcularInteres(){
+        return this.saldo*this.tasaInteres
+    }
 }

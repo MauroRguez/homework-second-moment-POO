@@ -1,5 +1,7 @@
-// import Cliente from "./Cliente";
-// import Cuenta from "./Cuenta";
+import '.transaccional';
+import Cuenta from './Cuenta';
+import Cliente from './Cliente';
+
 
 const saldo = document.getElementById("mi-saldo-actual");
 
