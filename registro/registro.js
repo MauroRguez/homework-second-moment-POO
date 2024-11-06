@@ -5,11 +5,13 @@ document
   
         // Obtener valores de los campos del formulario
         const nombre = document.getElementById("nombre").value;
+        const apellidos = document.getElementById("apellidos").value;
+        const direccion = document.getElementById("direccion").value;
+        const genero = document.getElementById("genero").value;
         const tipoDocumento = document.getElementById("tipoDocumento").value;
         const numeroDocumento = document.getElementById("numeroDocumento").value;
-        const email = document.getElementById("email").value;
-        const genero = document.getElementById("genero").value;
         const telefono = document.getElementById("telefono").value;
+        const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const passwordValid= document.getElementById("passwordValid").value;
         //comparar contraseñas
@@ -17,26 +19,28 @@ document
             alert("Las contraseñas no coinciden");
             return;
         }
-        const numberAccount = Math.floor(Math.random() * 1000000000);
-        // Validación de contraseña
-        // const passwordPattern = /^(?=.[A-Z])(?=.\d).{8,}$/;
-        // if (!passwordPattern.test(password)) {
-        //   alert("La contraseña debe contener al menos una mayúscula, un número, y tener un mínimo de 8 caracteres.");
-        //   return;
-        // }
-  
+
         // Almacenar datos en localStorage
         const userData = {
             nombre,
+            apellidos,
+            direccion,
+            genero,
             tipoDocumento,
             numeroDocumento,
-            email,
-            genero,
             telefono,
+            email,
             password, // Nota: No es seguro almacenar contraseñas en localStorage en aplicaciones reales
-            numberAccount,
-            saldo: 0,
-            transacciones: [],
+            cuentaCorriente: {
+                saldo: 0,
+                transacciones: [],
+                accountNumber: Math.floor(Math.random() * 1000000000)
+            },
+            cuentaAhorros: {
+                saldo: 0,
+                transacciones: [],
+                accountNumber: Math.floor(Math.random() * 1000000000)
+            },
         };
         
         const listUsers = JSON.parse(localStorage.getItem("registroUsuarios")) || [];
