@@ -1,14 +1,17 @@
-// import { OptionActions } from "./optionsActions.js";
 import { CuentaAhorro } from "./CuentaAhorro.js";
 import { CuentaCorriente } from "./CuentaCorriente.js";
 
+// boton cerrar sesion
+const closeSession = document.getElementById('closeSession');
 // contenedores de inputs
 const containerTipoCuenta = document.getElementById('containerTipoCuenta');
+const containerTipoCuentaDestino = document.getElementById('containerTipoCuentaDestino');
 const containerCuentaDestino = document.getElementById('cuentaDestino');
 const containerValor = document.getElementById('valor');
 // inputs y selects
 const tipoTransaccion = document.getElementById('tipoTransaccion');
 const tipoCuenta = document.getElementById('tipoCuenta');
+const tipoCuentaDestino = document.getElementById('tipoCuentaDestino');
 const cuentaDestino = document.getElementById('numeroCuentaDestino');
 const valor = document.getElementById('valorMovimiento');
 // botones
@@ -16,13 +19,53 @@ const buttonSend = document.getElementById('submitBtn');
 // ocultar los campos desde el inicio
 document.addEventListener('DOMContentLoaded', () => {
     resetPreview();
+    // ! falta validar si el usuario esta logueado
 });
+
+// limpiar el userSession del localStorage y navegar a login.html
+closeSession.addEventListener('click', () => {
+    localStorage.removeItem('userSession');
+    window.location.href = '../../ingreso/index.html';
+});
+
+// cada que cambie el tipoCuenta y en tipo transaccion sea transferencia
+tipoCuentaDestino.addEventListener('change', (e) => {
+    if (tipoTransaccion.value === "transferencia") {
+        const tipoCuentaSend = e.target.value;
+        const clientsBank = JSON.parse(localStorage.getItem('registroUsuarios'));
+        const userSession = JSON.parse(localStorage.getItem('userSession'));
+
+        // eliminamos el cliente actual de la lista de clientes
+        const clients = clientsBank.filter((client) => client.email !== userSession);
+        containerCuentaDestino.classList.remove('d-none');
+        cuentaDestino.innerHTML = '';
+
+        const optionVoid = document.createElement('option');
+        optionVoid.textContent = 'Selecciona una cuenta';
+        optionVoid.value = '';
+        cuentaDestino.append(optionVoid);
+        clients.forEach(client => {
+            // insertarlo en el select
+            const option = document.createElement('option');
+            if (tipoCuentaSend === 'ahorro') {
+                option.textContent = client.cuentaAhorros.accountNumber;
+                option.value = client.cuentaAhorros.accountNumber;
+            } else {
+                option.textContent = client.cuentaCorriente.accountNumber;
+                option.value = client.cuentaCorriente.accountNumber;
+            }
+            cuentaDestino.appendChild(option);
+        });
+    }
+});
+
 
 function resetPreview(){
     containerTipoCuenta.classList.add('d-none');
     containerCuentaDestino.classList.add('d-none');
     containerValor.classList.add('d-none');
     buttonSend.classList.add('d-none');
+    containerTipoCuentaDestino.classList.add('d-none');
 };
 
 function handleBalance(){
@@ -51,8 +94,8 @@ function handleWithdraw(){
 function handleTransfer(){
     resetPreview();
     containerTipoCuenta.classList.remove('d-none');
-    containerCuentaDestino.classList.remove('d-none');
     containerValor.classList.remove('d-none');
+    containerTipoCuentaDestino.classList.remove('d-none');
     buttonSend.classList.remove('d-none');
     buttonSend.textContent = 'Transferir';
 };
@@ -69,78 +112,36 @@ tipoTransaccion.addEventListener('change', (e) => {
 
     const selectedOption = optionsToSelect[tipoTransaccionValue];
     selectedOption();
-    return;
-
-    const tipoTransaccion = this.value;
-    const transaccionOpciones = document.getElementById('transaccionOpciones');
-    const submitBtn = document.getElementById('submitBtn');
-    const accountInfo = document.getElementById('accountInfo');
-
-    if (tipoTransaccion === 'saldo') {
-        // Ocultar las demás opciones del formulario
-        transaccionOpciones.style.display = 'none';
-
-        // Mostrar saldo al hacer clic en el botón Enviar
-        submitBtn.addEventListener('click', function(event) {
-            event.preventDefault();
-            mostrarSaldo();
-        });
-    } else if (tipoTransaccion === 'deposito') {
-        // Mostrar las demás opciones del formulario
-        transaccionOpciones.style.display = 'block';
-        // Ocultar el campo "Número de cuenta destino"
-        cuentaDestino.style.display = 'none';
-
-        // Remover el evento click del botón Enviar para evitar múltiples bindings
-        const newSubmitBtn = submitBtn.cloneNode(true);
-        submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
-    }else if (tipoTransaccion === 'retiro') {
-        // Mostrar las demás opciones del formulario
-        transaccionOpciones.style.display = 'block';
-        // Ocultar el campo "Número de cuenta destino"
-        cuentaDestino.style.display = 'none';
-
-        // Remover el evento click del botón Enviar para evitar múltiples bindings
-        const newSubmitBtn = submitBtn.cloneNode(true);
-        submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
-    }
-    
-    else if (tipoTransaccion === 'transferencia') {
-        // Mostrar las demás opciones del formulario
-        transaccionOpciones.style.display = 'block';
-
-        // Remover el evento click del botón Enviar para evitar múltiples bindings
-        const newSubmitBtn = submitBtn.cloneNode(true);
-        submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
-    }
 });
 
-
-
-// const opcionesMovimiento = new OptionActions();
 
 const optionsAhorros = new CuentaAhorro();
 const optionsCorriente = new CuentaCorriente();
 
 const optionsActions = {
     'saldo': {
-        'ahorro': () => {
-            console.log('Consultar saldo ahorro');
-            optionsAhorros.consultaSaldo('ahorro')
-        },
+        'ahorro': () => optionsAhorros.consultaSaldo('ahorros'),
         'corriente': () => optionsCorriente.consultaSaldo('corriente')
     },
     'deposito': {
-        'ahorro': optionsAhorros.realizarDeposito,
-        'corriente': optionsAhorros.realizarDeposito
+        'ahorro': () => optionsAhorros.realizarDeposito('ahorros', valor.value),
+        'corriente': () => optionsAhorros.realizarDeposito('corriente', valor.value)
     },
     'retiro': {
-        'ahorro': optionsAhorros.realizarRetiro,
-        'corriente': optionsCorriente.realizarRetiro
+        'ahorro': () => optionsAhorros.realizarRetiro('ahorros', valor.value),
+        'corriente': () => optionsCorriente.realizarRetiro('corriente', valor.value)
     },
     'transferencia': {
-        'ahorro': optionsAhorros.realizarTransferencia,
-        'corriente': optionsCorriente.realizarTransferencia
+        'ahorro': () => {
+            optionsAhorros.realizarTransferencia(
+                valor.value, tipoCuenta.value,
+                tipoCuentaDestino.value, cuentaDestino.value
+            )
+        },
+        'corriente': () => optionsCorriente.realizarTransferencia(
+            valor.value, tipoCuenta.value,
+            tipoCuentaDestino.value, cuentaDestino.value
+        )
     }
 };
 

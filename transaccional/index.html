@@ -87,6 +87,7 @@
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item active">
                                         <a class="page-scroll" href="#home">Inicio</a>
+                                        <a class="page-scroll" id="closeSession" style="cursor: pointer;">Cerrar Sessión</a>
                                     </li>
                                 </ul>
                             </div>
@@ -125,9 +126,17 @@
                                         <option value="corriente">Cuenta de Corriente</option>
                                     </select>
                                 </div>
+                                <div class="input-group mb-3" id="containerTipoCuentaDestino">
+                                    <span class="input-group-text" id="basic-addon1">Tipo de cuenta Destino</span>
+                                    <select class="form-control" id="tipoCuentaDestino" aria-describedby="basic-addon1" required>
+                                        <option value="">Seleccione tipo de cuenta</option>
+                                        <option value="ahorro">Cuenta de Ahorro</option>
+                                        <option value="corriente">Cuenta de Corriente</option>
+                                    </select>
+                                </div>
                                 <div class="input-group mb-3" id="cuentaDestino">
                                     <span class="input-group-text" id="basic-addon1">Número de cuenta destino</span>
-                                    <input type="text" class="form-control" id="numeroCuentaDestino" aria-describedby="basic-addon1">
+                                    <select class="form-control" id="numeroCuentaDestino"></select>
                                 </div>
                                 <div class="input-group mb-3" id="valor">
                                     <span class="input-group-text">Valor $</span>

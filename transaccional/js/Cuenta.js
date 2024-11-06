@@ -6,78 +6,135 @@ class Cuenta extends Cliente {
     this.numCuenta = numCuenta;
     this.saldo = saldo;
   }
-  //metodo consultar saldo
+  
+
   consultaSaldo = (tipoCuenta) => {
     const dataUser = this.getDataUser();
+    let saldo;
+
     if (tipoCuenta == 'corriente') {
-      return dataUser.CuentaCorriente.saldo;
+      saldo = dataUser.cuentaCorriente.saldo;
     } else if (tipoCuenta == 'ahorros') {
-      const saldo = dataUser.CuentaAhorro.saldo;
-      console.log('saldo: ', saldo);
-      this.containerData.innerHTML = `
-        <p>Saldo: ${saldo}</p>
-      `;
+      saldo = dataUser.cuentaAhorros.saldo;
+    } else {
+      alert('Tipo de cuenta no valido');
+      return;
     }
+
+    this.containerData.innerHTML = `
+      <p>Saldo: ${saldo}</p>
+    `;
   }
-  //metodo realizar deposito
-  realizarDeposito = (cantidad, tipoCuenta) => {
+  
+
+  realizarDeposito = (tipoCuenta, cantidad ) => {
+    console.log('cantidad: ', cantidad);
+    console.log('tipoCuenta: ', tipoCuenta);
     const dataUser = this.getDataUser();
+
     if (tipoCuenta == 'corriente') {
-        dataUser.CuentaCorriente.saldo += cantidad;
-        dataUser.CuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
-        this.setDataUser(dataUser);
+      let saldo = Number(dataUser.cuentaCorriente.saldo);
+      dataUser.cuentaCorriente.saldo = saldo + Number(cantidad);
+      dataUser.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
+      console.log('dataUser: ', dataUser);
+      this.setDataUser(dataUser);
     } else if (tipoCuenta == 'ahorros') {
-        dataUser.CuentaAhorro.saldo += cantidad;
-        dataUser.CuentaAhorro.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
-        this.setDataUser(dataUser);
+      let saldo = Number(dataUser.cuentaAhorros.saldo);
+      dataUser.cuentaAhorros.saldo = saldo + Number(cantidad);
+      dataUser.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
+      console.log('dataUser: ', dataUser);
+      this.setDataUser(dataUser);
     }
   }
 
-  //metodo realizar retiro
-  realizarRetiro = (cantidad, tipoCuenta) => {
+  realizarRetiro = (tipoCuenta, cantidad) => {
     const dataUser = this.getDataUser();
-    if (tipoCuenta == 'corriente' && dataUser.CuentaCorriente.saldo <= 0) {
+
+    if (tipoCuenta == 'corriente' && dataUser.cuentaCorriente.saldo <= 0) {
         alert('Disculpa los inconvenientes, tenemos problemas con el sistema, nuestra app sigue en desarrollo');
         // this.realizarSobregiro(); //! falta solucionar este detalle
         return;
     }
-    if (tipoCuenta == 'ahorros' && dataUser.CuentaAhorro.saldo <= 0) {
+    if (tipoCuenta == 'ahorros' && dataUser.cuentaAhorros.saldo <= 0) {
         alert('No puedes realizar retiro, saldo insuficiente');
         return;
     }
 
     if (tipoCuenta == 'corriente') {
-        if (dataUser.CuentaCorriente.saldo < cantidad) {
+        if (dataUser.cuentaCorriente.saldo < cantidad) {
             alert('No puedes realizar retiro, saldo insuficiente');
             return;
         }
-        dataUser.CuentaCorriente.saldo -= cantidad;
-        dataUser.CuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
+        let saldo = Number(dataUser.cuentaCorriente.saldo);
+        dataUser.cuentaCorriente.saldo = saldo - Number(cantidad);
+        dataUser.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
         this.setDataUser(dataUser);
-    } else if (tipoCuenta == 'ahorros' && dataUser.CuentaAhorro.saldo > 0) {
-        if (dataUser.CuentaAhorro.saldo < cantidad) {
+    } else if (tipoCuenta == 'ahorros' && dataUser.cuentaAhorros.saldo > 0) {
+        if (dataUser.cuentaAhorros.saldo < cantidad) {
             alert('No puedes realizar retiro, saldo insuficiente');
             return;
         }
-        dataUser.CuentaAhorro.saldo -= cantidad;
-        dataUser.CuentaAhorro.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
+        let saldo = Number(dataUser.cuentaAhorros.saldo);
+        dataUser.cuentaAhorros.saldo = saldo - Number(cantidad);
+        dataUser.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
         this.setDataUser(dataUser);
     }
   }
 
-  realizarTransferencia = (cantidad, tipoCuenta, numeroCuenta, tipoCuentaDestino, cuentaDestino) => {
-    alert('Disculpa los inconvenientes, tenemos problemas con el sistema, nuestra app sigue en desarrollo');
-    // const dataUser = this.getDataUser();
-    // if (tipoCuenta == 'corriente') {
-    //     if (dataUser.CuentaCorriente.saldo < cantidad) {
-    //         alert('No puedes realizar transferencia, saldo insuficiente');
-    //         return;
-    //     }
-    //     dataUser.CuentaCorriente.saldo -= cantidad;
-    //     dataUser.CuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Transferencia', cantidad });
-    //     this.setDataUser(dataUser);
-        
-    // }
+  realizarTransferencia = (cantidad, tipoCuenta, tipoCuentaDestino, cuentaDestino) => {
+    console.log('tipoCuenta: ', tipoCuenta);
+    // alert('Disculpa los inconvenientes, tenemos problemas con el sistema, nuestra app sigue en desarrollo');
+    const dataUser = this.getDataUser();
+    // 1- descontar saldo de la cuenta origen
+    if (tipoCuenta == 'corriente') {
+      if (dataUser.cuentaCorriente.saldo < cantidad) {
+        alert('No puedes realizar retiro, saldo insuficiente');
+        return;
+      }
+      let saldo = Number(dataUser.cuentaCorriente.saldo);
+      dataUser.cuentaCorriente.saldo = saldo - Number(cantidad);
+      dataUser.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
+      this.setDataUser(dataUser);
+
+      // transferir saldo a la cuenta destino
+      const userToPay = this.getUserToPay(cuentaDestino);
+      if (tipoCuentaDestino == 'corriente') {
+        let saldoToPay = Number(userToPay.cuentaCorriente.saldo);
+        userToPay.cuentaCorriente.saldo = saldoToPay + Number(cantidad);
+        userToPay.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
+      } else if (tipoCuentaDestino == 'ahorro') {
+        let saldoToPay = Number(userToPay.cuentaAhorros.saldo);
+        userToPay.cuentaAhorros.saldo = saldoToPay + Number(cantidad);
+        userToPay.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
+      }
+      this.setUserToPay(userToPay);
+    } else if (tipoCuenta == 'ahorro') {
+      if (dataUser.cuentaAhorros.saldo < cantidad) {
+        alert('No puedes realizar retiro, saldo insuficiente');
+        return;
+      }
+      let saldo = Number(dataUser.cuentaAhorros.saldo);
+      dataUser.cuentaAhorros.saldo = saldo - Number(cantidad);
+      dataUser.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
+      this.setDataUser(dataUser);
+
+      const userToPay = this.getUserToPay(cuentaDestino);
+      if (tipoCuentaDestino == 'corriente') {
+        let saldoToPay = Number(userToPay.cuentaCorriente.saldo);
+        userToPay.cuentaCorriente.saldo = saldoToPay + Number(cantidad);
+        userToPay.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
+      } else if (tipoCuentaDestino == 'ahorro') {
+        let saldoToPay = Number(userToPay.cuentaAhorros.saldo);
+        userToPay.cuentaAhorros.saldo = saldoToPay + Number(cantidad);
+        userToPay.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
+      }
+      this.setUserToPay(userToPay);
+    } else {
+      alert('Tipo de cuenta no valido');
+      return;
+    }
+    // 2- agregar saldo a la cuenta destino
+
   }
 }
 export { Cuenta };

@@ -16,7 +16,9 @@ class CuentaCorriente extends Cuenta {
         }
 
         const dataUser = this.getDataUser();
-        dataUser.CuentaCorriente.saldo -= valueGiro;
+        let saldo = Number(dataUser.CuentaCorriente.saldo);
+        dataUser.cuentaCorriente.saldo = saldo - valueGiro;
+        dataUser.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Sobregiro', cantidad: valueGiro });
         this.setDataUser(dataUser);
     }
 }
