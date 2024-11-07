@@ -100,13 +100,22 @@ function handleTransfer(){
     buttonSend.textContent = 'Transferir';
 };
 
+function handleTransactions(){
+    resetPreview();
+    // containerTipoCuenta.classList.remove('d-none');
+    buttonSend.classList.remove('d-none');
+    buttonSend.textContent = 'Consultar transacciones';
+}
+
 const optionsToSelect = {
     '': resetPreview,
     'saldo': handleBalance,
     'deposito': handleDeposit,
     'retiro': handleWithdraw,
-    'transferencia': handleTransfer
+    'transferencia': handleTransfer,
+    'transacciones': handleTransactions
 };
+
 tipoTransaccion.addEventListener('change', (e) => {
     const tipoTransaccionValue = e.target.value; // saldo - deposito - retiro - transferencia
 
@@ -142,12 +151,20 @@ const optionsActions = {
             valor.value, tipoCuenta.value,
             tipoCuentaDestino.value, cuentaDestino.value
         )
-    }
+    },
+    'transacciones': optionsAhorros.transacciones,
 };
 
 buttonSend.addEventListener('click', () => {
     const tipoTransaccionValue = tipoTransaccion.value;
+    console.log('tipoTransaccionValue: ', tipoTransaccionValue);
     const tipoCuentaValue = tipoCuenta.value;
+
+    if (tipoTransaccionValue === 'transacciones') {
+        const selectedOption = optionsActions[tipoTransaccionValue];
+        selectedOption();
+        return;
+    }
 
     if(tipoTransaccionValue === '' || tipoCuentaValue === ''){
         alert('Por favor selecciona una opción válida');

@@ -25,7 +25,6 @@ class Cuenta extends Cliente {
       <p>Saldo: ${saldo}</p>
     `;
   }
-  
 
   realizarDeposito = (tipoCuenta, cantidad ) => {
     console.log('cantidad: ', cantidad);
@@ -38,12 +37,14 @@ class Cuenta extends Cliente {
       dataUser.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
       console.log('dataUser: ', dataUser);
       this.setDataUser(dataUser);
+      alert('Deposito realizado con exito');
     } else if (tipoCuenta == 'ahorros') {
       let saldo = Number(dataUser.cuentaAhorros.saldo);
       dataUser.cuentaAhorros.saldo = saldo + Number(cantidad);
       dataUser.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
       console.log('dataUser: ', dataUser);
       this.setDataUser(dataUser);
+      alert('Deposito realizado con exito');
     }
   }
 
@@ -69,6 +70,7 @@ class Cuenta extends Cliente {
         dataUser.cuentaCorriente.saldo = saldo - Number(cantidad);
         dataUser.cuentaCorriente.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
         this.setDataUser(dataUser);
+        alert('Retiro realizado con exito');
     } else if (tipoCuenta == 'ahorros' && dataUser.cuentaAhorros.saldo > 0) {
         if (dataUser.cuentaAhorros.saldo < cantidad) {
             alert('No puedes realizar retiro, saldo insuficiente');
@@ -78,6 +80,7 @@ class Cuenta extends Cliente {
         dataUser.cuentaAhorros.saldo = saldo - Number(cantidad);
         dataUser.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Retiro', cantidad });
         this.setDataUser(dataUser);
+        alert('Retiro realizado con exito');
     }
   }
 
@@ -108,6 +111,7 @@ class Cuenta extends Cliente {
         userToPay.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
       }
       this.setUserToPay(userToPay);
+      alert('Transferencia realizada con exito');
     } else if (tipoCuenta == 'ahorro') {
       if (dataUser.cuentaAhorros.saldo < cantidad) {
         alert('No puedes realizar retiro, saldo insuficiente');
@@ -129,11 +133,70 @@ class Cuenta extends Cliente {
         userToPay.cuentaAhorros.transacciones.push({ fecha: new Date(), descripcion: 'Deposito', cantidad });
       }
       this.setUserToPay(userToPay);
+      alert('Transferencia realizada con exito');
     } else {
       alert('Tipo de cuenta no valido');
       return;
     }
     // 2- agregar saldo a la cuenta destino
+
+  }
+
+  transacciones = () => {
+    const dataUser = this.getDataUser();
+
+    this.containerData.innerHTML = `
+    <div class="row">
+    <!-- Columna Cuenta Corriente -->
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header text-white bg-primary">
+          <h5 class="mb-0"><i class="bi bi-wallet2"></i> Cuenta Corriente</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          ${dataUser.cuentaCorriente.transacciones.map((movimiento) => `
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="mb-1"><strong>Fecha:</strong> ${new Date(movimiento.fecha).toISOString().slice(0, 19).replace("T", " ")}</p>
+                  <p class="mb-1"><strong>Descripción:</strong> ${movimiento.descripcion}</p>
+                </div>
+                <div>
+                  <p class="mb-1 text-success"><i class="bi bi-currency-dollar"></i> ${movimiento.cantidad}</p>
+                </div>
+              </div>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Columna Cuenta Ahorros -->
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header text-white bg-success">
+          <h5 class="mb-0"><i class="bi bi-piggy-bank"></i> Cuenta Ahorros</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          ${dataUser.cuentaAhorros.transacciones.map((movimiento) => `
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="mb-1"><strong>Fecha:</strong> ${new Date(movimiento.fecha).toISOString().slice(0, 19).replace("T", " ")}</p>
+                  <p class="mb-1"><strong>Descripción:</strong> ${movimiento.descripcion}</p>
+                </div>
+                <div>
+                  <p class="mb-1 text-primary"><i class="bi bi-currency-dollar"></i> ${movimiento.cantidad}</p>
+                </div>
+              </div>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    </div>
+  </div>
+`;
+
 
   }
 }
